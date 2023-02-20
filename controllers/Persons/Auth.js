@@ -1,50 +1,19 @@
 const User = require("../../models/Persons/Users"),
-  Attendances = require("../../models/Persons/Attendances"),
   generateToken = require("../../config/generateToken");
 
 // entity/login
 exports.login = (req, res) => {
   const { email, password } = req.query;
 
-  User.find({ $or: [{ email }, { mobile: email }] })
-    .populate("fullName.mname fullName.lname")
-    .then(async users => {
-      var user = users[0];
+  User.findOne({ $or: [{ email }, { mobile: email }] })
+    .then(async user => {
       if (user) {
         if (await user.matchPassword(password)) {
-          if (user.deletedAt) {
-            res.json({ error: "Your account has been banned!" });
+          if (!user.deletedAt) {
+            user.password = undefined;
+            res.json({ user, token: generateToken(user._id) });
           } else {
-            if (user.role) {
-              Attendances.find()
-                .byUser(user._id)
-                .then(attendances => {
-                  const handleNew = () =>
-                    Attendances.create({
-                      userId: user._id,
-                      in: new Date().toLocaleTimeString(),
-                      out: "",
-                    }).then(() => {
-                      user.password = undefined;
-                      res.json({ user, token: generateToken(user._id) });
-                    });
-
-                  if (attendances.length > 0) {
-                    const latest = attendances[attendances.length - 1];
-
-                    if (latest.out) {
-                      handleNew();
-                    } else {
-                      user.password = undefined;
-                      res.json({ user, token: generateToken(user._id) });
-                    }
-                  } else {
-                    handleNew();
-                  }
-                });
-            } else {
-              res.json({ error: "Your role has not been declared yet!" });
-            }
+            res.json({ error: "Your account has been banned!" });
           }
         } else {
           res.json({ error: "Password is incorrect!" });
