@@ -1,18 +1,6 @@
 const router = require("express").Router(),
-  {
-    login,
-    validateRefresh,
-    save,
-    changePassword,
-    file,
-  } = require("../../controllers/Persons/Auth"),
-  { protect } = require("../../middleware");
+  { login, save } = require("../../controllers/Persons/Auth");
 
-router
-  .get("/login", login)
-  .get("/validateRefresh", validateRefresh)
-  .post("/save", save)
-  .put("/changePassword", protect, changePassword)
-  .post("/file", protect, file);
+router.get("/login", login).post("/save", save);
 
 module.exports = router;
