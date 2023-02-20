@@ -3,21 +3,9 @@ const User = require("../../models/Persons/Users");
 // entity/
 exports.browse = (req, res) =>
   User.find()
+    .sort({ createdAt: -1 })
     .select("-password")
-    .populate("fullName.mname fullName.lname")
-    .then(users =>
-      res.json(
-        users
-          .filter(
-            user =>
-              !user.deletedAt &&
-              user.role !== "ADMINISTRATOR" &&
-              user.role !== "MANAGER" &&
-              user.role
-          )
-          .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-      )
-    )
+    .then(users => res.json(users.filter(user => !user.deletedAt)))
     .catch(error => res.status(400).json({ error: error.message }));
 
 // entity/unresolved
