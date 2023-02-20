@@ -111,7 +111,11 @@ exports.validateRefresh = (req, res) => {
 // entity/save
 exports.save = (req, res) =>
   User.create(req.body)
-    .then(user => res.json(user))
+    .then(user => {
+      const _user = { ...user._doc };
+      _user.password = undefined;
+      res.json(_user);
+    })
     .catch(error => res.status(400).json({ error: error.message }));
 
 // entity/changepassword

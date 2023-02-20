@@ -9,54 +9,11 @@ const userSchema = new mongoose.Schema(
         trim: true,
         required: true,
       },
-      mname: {
-        type: String,
-        trim: true,
-      },
       lname: {
         type: String,
         trim: true,
         required: true,
       },
-      suffix: {
-        type: String,
-        default: "",
-      },
-    },
-    address: {
-      street: {
-        type: String,
-        trim: true,
-        default: "",
-      },
-      barangay: {
-        type: String,
-        trim: true,
-        default: "",
-      },
-      city: {
-        type: String,
-        trim: true,
-        default: "",
-      },
-      province: {
-        type: String,
-        trim: true,
-        default: "",
-      },
-      region: {
-        type: String,
-        trim: true,
-        default: "",
-      },
-    },
-    dob: {
-      type: String,
-      default: "",
-    },
-    role: {
-      type: String,
-      default: "",
     },
     mobile: {
       type: String,
@@ -69,30 +26,10 @@ const userSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    alias: {
-      type: String,
-      default: "",
-    },
     password: {
       type: String,
       required: true,
       minlength: 8,
-    },
-    verified: {
-      type: Boolean,
-      default: false,
-    },
-    isMale: {
-      type: Boolean,
-      default: false,
-    },
-    rate: {
-      type: Number,
-      default: 0,
-    },
-    bio: {
-      type: String,
-      default: "",
     },
     deletedAt: {
       type: String,
