@@ -1,8 +1,7 @@
-const User = require("../../models/Persons/Users"),
-  generateToken = require("../../config/generateToken");
+const User = require("../../../models/Persons/Users"),
+  generateToken = require("../../../config/generateToken");
 
-// entity/login
-exports.login = (req, res) => {
+module.exports = (req, res) => {
   const { email, password } = req.query;
 
   User.findOne({ $or: [{ email }, { mobile: email }] })
@@ -24,13 +23,3 @@ exports.login = (req, res) => {
     })
     .catch(error => res.status(400).json({ error: error.message }));
 };
-
-// entity/save
-exports.save = (req, res) =>
-  User.create(req.body)
-    .then(user => {
-      const _user = { ...user._doc };
-      _user.password = undefined;
-      res.json(_user);
-    })
-    .catch(error => res.status(400).json({ error: error.message }));
