@@ -1,10 +1,8 @@
 const UserModel = require("../../../models/Persons/Users");
 
 module.exports = (req, res) =>
-  UserModel.create(req.body)
-    .then(user => {
-      const _user = { ...user._doc };
-      _user.password = undefined;
-      res.json(_user);
-    })
+  UserModel.findByIdAndUpdate(req.params.id, {
+    deletedAt: new Date().toLocaleString(),
+  })
+    .then(() => res.json(req.params.id))
     .catch(error => res.status(400).json({ error: error.message }));

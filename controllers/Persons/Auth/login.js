@@ -1,10 +1,10 @@
-const User = require("../../../models/Persons/Users"),
+const UserModel = require("../../../models/Persons/Users"),
   generateToken = require("../../../config/generateToken");
 
 module.exports = (req, res) => {
   const { email, password } = req.query;
 
-  User.findOne({ $or: [{ email }, { mobile: email }] })
+  UserModel.findOne({ $or: [{ email }, { mobile: email }] })
     .then(async user => {
       if (user) {
         if (await user.matchPassword(password)) {
