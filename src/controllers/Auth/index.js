@@ -1,4 +1,4 @@
-module.exports = Object.freeze({
+module.exports = {
   login: require("./login"),
   register: require("./register"),
-});
+};
