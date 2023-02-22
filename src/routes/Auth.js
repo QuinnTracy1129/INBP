@@ -1,6 +1,7 @@
 const router = require("express").Router(),
-  { login, register } = require("../controllers/Auth");
+  loginController = require("../controllers/Auth/login"),
+  ExpressCallback = require("../middleware/expressCallback");
 
-router.get("/login", login).post("/register", register);
+router.get("/login", ExpressCallback(loginController));
 
 module.exports = router;
