@@ -1,7 +1,7 @@
 const UserModel = require("../../models/Users");
 
-module.exports = form => {
-  const { email, password } = form.query;
+module.exports = req => {
+  const { email, password } = req.query;
 
   return UserModel.findOne({ $or: [{ email }, { mobile: email }] })
     .then(async user => {
