@@ -8,7 +8,7 @@ module.exports = req =>
           deletedAt: null,
         })
           .select("-password")
-          .then(user => `User ${user._id} restored successfully.`)
+          .then(() => `User ${user._id} restored successfully.`)
           .catch(error => ({ error: error.message, statusCode: 400 }));
       } else {
         return {

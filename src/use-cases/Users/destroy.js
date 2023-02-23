@@ -8,7 +8,7 @@ module.exports = req =>
           deletedAt: new Date().toLocaleString(),
         })
           .select("-password")
-          .then(user => `User ${user._id} deleted successfully.`)
+          .then(() => `User ${user._id} deleted successfully.`)
           .catch(error => ({ error: error.message, statusCode: 400 }));
       } else {
         return {
