@@ -4,33 +4,22 @@ const registerEntity = ({}) =>
 
     if (!fullName.fname) {
       throw new Error("Firstname is required!");
-      //   return {
-      //     error: "Firstname is required!",
-      //   };
     }
 
     if (!fullName.lname) {
-      return {
-        error: "Lastname is required!",
-      };
+      throw new Error("Lastname is required!");
     }
 
     if (!mobile) {
-      return {
-        error: "Contact is required!",
-      };
+      throw new Error("Contact is required!");
     }
 
     if (!email) {
-      return {
-        error: "E-mail address is required!",
-      };
+      throw new Error("E-mail address is required!");
     }
 
     if (!password) {
-      return {
-        error: "Password is required!",
-      };
+      throw new Error("Password is required!");
     }
 
     return form;
