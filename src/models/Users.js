@@ -16,6 +16,18 @@ const userSchema = new mongoose.Schema(
         required: true,
       },
     },
+    address: {
+      present: {
+        type: String,
+        trim: true,
+        required: true,
+      },
+      permanent: {
+        type: String,
+        trim: true,
+        required: true,
+      },
+    },
     mobile: {
       type: String,
       unique: true,

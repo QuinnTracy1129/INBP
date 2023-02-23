@@ -1,12 +1,20 @@
 const registerEntity = ({}) =>
   async function (form) {
-    const { fullName, mobile, email, password } = form;
+    const { fullName, address, mobile, email, password } = form;
 
     if (!fullName.fname) {
       throw new Error("Firstname is required!");
     }
 
     if (!fullName.lname) {
+      throw new Error("Lastname is required!");
+    }
+
+    if (!address.present) {
+      throw new Error("Firstname is required!");
+    }
+
+    if (!address.permanent) {
       throw new Error("Lastname is required!");
     }
 
