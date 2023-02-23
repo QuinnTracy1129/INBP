@@ -5,7 +5,7 @@ module.exports = req =>
   updateEntity(req.body)
     .then(res =>
       TaskModel.findByIdAndUpdate(req.params.id, res, { new: true })
-        .then(task => task)
+        .then(task => `${task.name} updated successfully.`)
         .catch(error => ({ error: error.message, statusCode: 400 }))
     )
     .catch(err => ({ error: err.message, statusCode: 400 }));

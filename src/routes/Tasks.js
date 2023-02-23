@@ -1,7 +1,7 @@
 const router = require("express").Router(),
   browseController = require("../controllers/Tasks/browse"),
   archiveController = require("../controllers/Tasks/archive"),
-  //   findController = require("../controllers/Users/archive"),
+  findController = require("../controllers/Tasks/find"),
   createController = require("../controllers/Tasks/create"),
   updateController = require("../controllers/Tasks/update"),
   restoreController = require("../controllers/Tasks/restore"),
@@ -12,7 +12,7 @@ const router = require("express").Router(),
 router
   .get("/", verify, ExpressCallback(browseController))
   .get("/archive", verify, ExpressCallback(archiveController))
-  //   .get("/:id/find", verify, ExpressCallback(findController))
+  .get("/:userId/find", verify, ExpressCallback(findController))
   .post("/create", verify, ExpressCallback(createController))
   .put("/:id/update", verify, ExpressCallback(updateController))
   .put("/:id/restore", verify, ExpressCallback(restoreController))

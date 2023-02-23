@@ -29,6 +29,10 @@ modelSchema.query.byUser = function (userId) {
   return this.where({ userId });
 };
 
+modelSchema.query.byCompleted = function (isCompleted) {
+  return this.where({ isCompleted });
+};
+
 const Entity = mongoose.model("Tasks", modelSchema);
 
 module.exports = Entity;

@@ -7,7 +7,6 @@ module.exports = req =>
         return TaskModel.findByIdAndUpdate(req.params.id, {
           deletedAt: null,
         })
-          .select("-password")
           .then(() => `Task ${task._id} restored successfully.`)
           .catch(error => ({ error: error.message, statusCode: 400 }));
       } else {

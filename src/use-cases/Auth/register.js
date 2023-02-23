@@ -8,7 +8,7 @@ module.exports = req =>
         .then(user => {
           const _user = { ...user._doc };
           _user.password = undefined;
-          return _user;
+          return `${_user.email} registered successfully.`;
         })
         .catch(error => ({ error: error.message, statusCode: 400 }))
     )
