@@ -1,3 +1,1 @@
-const registerEntity = require("./register");
-
-module.exports = registerEntity({});
+module.exports = require("./register")({});

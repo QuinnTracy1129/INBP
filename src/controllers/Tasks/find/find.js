@@ -1,6 +1,4 @@
-const findController = ({ findUseCase }) =>
+module.exports = ({ findUseCase }) =>
   async function (httpRequest) {
     return findUseCase(httpRequest);
   };
-
-module.exports = findController;

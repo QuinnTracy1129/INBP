@@ -1,6 +1,4 @@
-const browseController = ({ browseUseCase }) =>
+module.exports = ({ browseUseCase }) =>
   async function (httpRequest) {
     return browseUseCase(httpRequest);
   };
-
-module.exports = browseController;

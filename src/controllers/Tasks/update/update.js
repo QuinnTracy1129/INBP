@@ -1,6 +1,4 @@
-const updateController = ({ updateUseCase }) =>
+module.exports = ({ updateUseCase }) =>
   async function (httpRequest) {
     return updateUseCase(httpRequest);
   };
-
-module.exports = updateController;

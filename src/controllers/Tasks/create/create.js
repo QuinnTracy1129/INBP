@@ -1,6 +1,4 @@
-const createController = ({ createUseCase }) =>
+module.exports = ({ createUseCase }) =>
   async function (httpRequest) {
     return createUseCase(httpRequest);
   };
-
-module.exports = createController;

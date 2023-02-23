@@ -1,6 +1,4 @@
-const archiveController = ({ archiveUseCase }) =>
+module.exports = ({ archiveUseCase }) =>
   async function (httpRequest) {
     return archiveUseCase(httpRequest);
   };
-
-module.exports = archiveController;

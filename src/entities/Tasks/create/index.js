@@ -1,3 +1,1 @@
-const createEntity = require("./create");
-
-module.exports = createEntity({});
+module.exports = require("./create")({});

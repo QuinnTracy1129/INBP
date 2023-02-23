@@ -1,6 +1,4 @@
-const loginController = ({ loginUseCase }) =>
+module.exports = ({ loginUseCase }) =>
   async function (httpRequest) {
     return loginUseCase(httpRequest);
   };
-
-module.exports = loginController;

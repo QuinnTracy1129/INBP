@@ -1,4 +1,4 @@
-const registerEntity = ({}) =>
+module.exports = ({}) =>
   async function (form) {
     const { fullName, address, mobile, email, password } = form;
 
@@ -32,5 +32,3 @@ const registerEntity = ({}) =>
 
     return form;
   };
-
-module.exports = registerEntity;

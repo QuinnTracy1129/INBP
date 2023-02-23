@@ -1,6 +1,4 @@
-const registerController = ({ registerUseCase }) =>
+module.exports = ({ registerUseCase }) =>
   async function (httpRequest) {
     return registerUseCase(httpRequest);
   };
-
-module.exports = registerController;

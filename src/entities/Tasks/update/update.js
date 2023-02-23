@@ -1,4 +1,4 @@
-const updateEntity = ({}) =>
+module.exports = ({}) =>
   async function (form) {
     const { name } = form;
 
@@ -8,5 +8,3 @@ const updateEntity = ({}) =>
 
     return form;
   };
-
-module.exports = updateEntity;

@@ -1,6 +1,4 @@
-const restoreController = ({ restoreUseCase }) =>
+module.exports = ({ restoreUseCase }) =>
   async function (httpRequest) {
     return restoreUseCase(httpRequest);
   };
-
-module.exports = restoreController;

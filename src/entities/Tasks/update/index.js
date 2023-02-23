@@ -1,3 +1,1 @@
-const updateEntity = require("./update");
-
-module.exports = updateEntity({});
+module.exports = require("./update")({});
