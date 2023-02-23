@@ -4,12 +4,12 @@ const router = require("express").Router(),
   restoreController = require("../controllers/Users/restore"),
   destroyController = require("../controllers/Users/destroy"),
   ExpressCallback = require("../middleware/expressCallback"),
-  auth = require("../middleware/auth");
+  verify = require("../middleware/verify");
 
 router
-  .get("/", auth, ExpressCallback(browseController))
-  .get("/archive", auth, ExpressCallback(archiveController))
-  .put("/:id/restore", auth, ExpressCallback(restoreController))
-  .delete("/:id/destroy", auth, ExpressCallback(destroyController));
+  .get("/", verify, ExpressCallback(browseController))
+  .get("/archive", verify, ExpressCallback(archiveController))
+  .put("/:id/restore", verify, ExpressCallback(restoreController))
+  .delete("/:id/destroy", verify, ExpressCallback(destroyController));
 
 module.exports = router;
