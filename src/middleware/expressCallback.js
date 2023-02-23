@@ -7,7 +7,13 @@ const ExpressCallback = controller => {
     };
 
     controller(httpRequest)
-      .then(httpResponse => res.json(httpResponse))
+      .then(httpResponse => {
+        if (httpResponse.statusCode) {
+          res.status(httpResponse.statusCode).json(httpResponse);
+        } else {
+          res.json(httpResponse);
+        }
+      })
       .catch(err => res.status(500).json(err));
   };
 };
