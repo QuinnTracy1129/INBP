@@ -1,10 +1,13 @@
-module.export = (req, res, proceed) => {
+const jwt = require("jsonwebtoken"),
+  UserModel = require("../models/Users");
+
+module.exports = (req, res, proceed) => {
   let token = req.headers.authorization;
 
   if (!token) {
     res.status(401).json("Not authorized, no token");
   } else {
-    if (token.startsWith("QTracy")) {
+    if (token.startsWith("Bearer")) {
       // decode token
       jwt.verify(
         token.split(" ")[1],
@@ -13,7 +16,7 @@ module.export = (req, res, proceed) => {
           if (error && error.name) {
             res.status(401).json({ expired: "Not authorized, token expired" });
           } else {
-            if (await User.findById(response.id)) {
+            if (await UserModel.findById(response.id)) {
               proceed();
             } else {
               res
