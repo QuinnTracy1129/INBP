@@ -3,8 +3,6 @@ const TaskModel = require("../../models/Tasks");
 module.exports = req => {
   const { status } = req.query;
 
-  console.log(status);
-
   if (status) {
     if (status === "completed" || status === "pending") {
       return TaskModel.find()
