@@ -9,7 +9,7 @@ module.exports = req => {
         if (await user.matchPassword(password)) {
           if (!user.deletedAt) {
             user.password = undefined;
-            return { user, token: user.createToken() };
+            return { user, token: await user.createToken() };
           } else {
             return { error: "Your account has been banned!" };
           }
