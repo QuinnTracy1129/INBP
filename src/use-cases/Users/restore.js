@@ -1,4 +1,5 @@
-const UserModel = require("../../models/Users");
+const UserModel = require("../../models/Users"),
+  HistoryModel = require("../../models/Histories");
 
 module.exports = req =>
   UserModel.findById(req.params.id)
@@ -8,10 +9,18 @@ module.exports = req =>
           return UserModel.findByIdAndUpdate(req.params.id, {
             deletedAt: null,
           })
-            .then(() => ({
-              success: `User (${user._id}) restored successfully.`,
-              statusCode: 200,
-            }))
+            .then(() =>
+              HistoryModel.create({
+                model: "Users",
+                action: "restore",
+                dataId: req.params.id,
+              })
+                .then(() => ({
+                  success: `User (${user._id}) restored successfully.`,
+                  statusCode: 200,
+                }))
+                .catch(error => ({ error: error.message, statusCode: 400 }))
+            )
             .catch(error => ({ error: error.message, statusCode: 400 }));
         } else {
           return {

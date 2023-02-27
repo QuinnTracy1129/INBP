@@ -7,7 +7,7 @@ module.exports = req =>
       TaskModel.create(res)
         .then(task => ({
           success: `Task (${task.name}) created successfully.`,
-          statusCode: 200,
+          statusCode: 201,
         }))
         .catch(error => ({ error: error.message, statusCode: 400 }))
     )

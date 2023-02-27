@@ -1,4 +1,5 @@
-const TaskModel = require("../../models/Tasks");
+const TaskModel = require("../../models/Tasks"),
+  HistoryModel = require("../../models/Histories");
 
 module.exports = req =>
   TaskModel.findById(req.params.id)
@@ -8,10 +9,18 @@ module.exports = req =>
           return TaskModel.findByIdAndUpdate(req.params.id, {
             deletedAt: new Date().toLocaleString(),
           })
-            .then(() => ({
-              success: `Task (${task._id}) deleted successfully.`,
-              statusCode: 200,
-            }))
+            .then(() =>
+              HistoryModel.create({
+                model: "Tasks",
+                action: "delete",
+                dataId: req.params.id,
+              })
+                .then(() => ({
+                  success: `Task (${task._id}) deleted successfully.`,
+                  statusCode: 200,
+                }))
+                .catch(error => ({ error: error.message, statusCode: 400 }))
+            )
             .catch(error => ({ error: error.message, statusCode: 400 }));
         } else {
           return {
