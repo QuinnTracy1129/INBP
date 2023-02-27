@@ -30,26 +30,26 @@ module.exports = ({}) =>
       throw new Error("Invalid data type for Address!");
     }
 
-    if (mobile) {
-      if (typeof mobile === "string") {
-        if (mobile.length !== 10) {
-          throw new Error("Invalid length for Mobile number!");
-        }
-      } else {
-        throw new Error("Invalid data type for Mobile number!");
+    if (typeof mobile === "string") {
+      if (mobile.length !== 10) {
+        throw new Error("Invalid length for Mobile number!");
       }
+    } else {
+      throw new Error("Invalid data type for Mobile number!");
     }
 
-    if (email) {
+    if (typeof email === "string") {
       var validRegex =
         /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
       if (!email.match(validRegex)) {
         throw new Error("Invalid E-mail address!");
       }
+    } else {
+      throw new Error("Invalid data type for E-mail address!");
     }
 
-    if (password) {
+    if (typeof password === "string") {
       if (password.length > 7) {
         var pattern = new RegExp(
           "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[-+_!@#$%^&*.,?]).+$"
@@ -63,6 +63,8 @@ module.exports = ({}) =>
       } else {
         throw new Error("Password is too weak!");
       }
+    } else {
+      throw new Error("Invalid data type for Password!");
     }
 
     return form;

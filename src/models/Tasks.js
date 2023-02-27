@@ -12,7 +12,21 @@ const modelSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    start: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    end: {
+      type: String,
+      required: true,
+      trim: true,
+    },
     isCompleted: {
+      type: Boolean,
+      default: false,
+    },
+    isEarly: {
       type: Boolean,
       default: false,
     },

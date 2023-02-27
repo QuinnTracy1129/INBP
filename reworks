@@ -1,2 +1,18 @@
 converted entities 
-instead of validating requirements, it now validates data types to reduce redundancy
+instead of validating requirements, 
+it now validates data types to reduce redundancy 
+and detect typos as it will mark as undefined and return invalid data type
+
+added proper status codes 
+
+added start, end and isEarly for task model
+
+added validation for start and end, end cannot be earlier than start
+
+updated task update to limit only name, start and end
+
+added validations for tasks, cannot update a finished task
+
+created new route for tasks, 
+task/:id/submit marks a task complete and returns status if early or late
+

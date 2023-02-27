@@ -8,9 +8,12 @@ module.exports = req => {
       return TaskModel.find()
         .byUser(req.params.userId)
         .byCompleted(status === "completed")
-        .populate("userId")
+        .select("-userId -createdAt -updatedAt")
         .sort({ createdAt: -1 })
-        .then(tasks => tasks.filter(item => !item.deletedAt))
+        .then(tasks => ({
+          success: tasks.filter(item => !item.deletedAt),
+          statusCode: 200,
+        }))
         .catch(error => ({ error: error.message, statusCode: 400 }));
     } else {
       return {
@@ -21,9 +24,12 @@ module.exports = req => {
   } else {
     return TaskModel.find()
       .byUser(req.params.userId)
-      .populate("userId")
+      .select("-userId -createdAt -updatedAt")
       .sort({ createdAt: -1 })
-      .then(tasks => tasks.filter(item => !item.deletedAt))
+      .then(tasks => ({
+        success: tasks.filter(item => !item.deletedAt),
+        statusCode: 200,
+      }))
       .catch(error => ({ error: error.message, statusCode: 400 }));
   }
 };
