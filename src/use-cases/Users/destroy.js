@@ -9,7 +9,7 @@ module.exports = req =>
             deletedAt: new Date().toLocaleString(),
           })
             .then(() => ({
-              succes: `User (${user._id}) deleted successfully.`,
+              success: `User (${user._id}) deleted successfully.`,
               statusCode: 200,
             }))
             .catch(error => ({ error: error.message, statusCode: 400 }));

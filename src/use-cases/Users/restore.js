@@ -9,7 +9,7 @@ module.exports = req =>
             deletedAt: null,
           })
             .then(() => ({
-              succes: `User (${user._id}) restored successfully.`,
+              success: `User (${user._id}) restored successfully.`,
               statusCode: 200,
             }))
             .catch(error => ({ error: error.message, statusCode: 400 }));
