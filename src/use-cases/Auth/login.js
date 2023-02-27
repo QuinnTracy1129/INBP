@@ -5,13 +5,14 @@ module.exports = req =>
   loginEntity(req.query)
     .then(res =>
       UserModel.findOne({ $or: [{ email: res.email }, { mobile: res.email }] })
+        .select("-mobile -email -createdAt -updatedAt")
         .then(async user => {
           if (user) {
             if (await user.matchPassword(res.password)) {
               if (!user.deletedAt) {
                 user.password = undefined;
                 return {
-                  user,
+                  success: user,
                   token: await user.createToken(),
                   statusCode: 200,
                 };
