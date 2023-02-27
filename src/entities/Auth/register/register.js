@@ -31,7 +31,13 @@ module.exports = ({}) =>
     }
 
     if (typeof mobile === "string") {
-      if (mobile.length !== 10) {
+      const mobileTrim = mobile.trim();
+
+      if (isNaN(Number(mobileTrim))) {
+        throw new Error("Invalid Mobile number!");
+      }
+
+      if (mobileTrim.length !== 10) {
         throw new Error("Invalid length for Mobile number!");
       }
     } else {
