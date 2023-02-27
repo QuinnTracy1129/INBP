@@ -4,7 +4,8 @@ module.exports = ({}) =>
 
     let isEarly = false;
 
-    const todayTime = new Date().getTime(),
+    const today = new Date(),
+      todayTime = today.getTime(),
       endTime = new Date(end).getTime();
 
     if (todayTime < endTime) {
@@ -13,6 +14,7 @@ module.exports = ({}) =>
 
     return {
       isEarly,
+      submittedAt: today.toLocaleString(),
       isCompleted: true,
     };
   };

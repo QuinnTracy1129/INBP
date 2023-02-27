@@ -1,6 +1,14 @@
 module.exports = ({}) =>
   async function (form, oldEnd) {
-    const { name, start, end } = form;
+    const { name, start, end, isCompleted, isEarly } = form;
+
+    if (isCompleted) {
+      throw new Error("Cannot submit completion here!");
+    }
+
+    if (isEarly) {
+      throw new Error("Cannot update status here!");
+    }
 
     const startTime = new Date(start).getTime(),
       endTime = new Date(end).getTime(),
@@ -38,5 +46,9 @@ module.exports = ({}) =>
       }
     }
 
-    return form;
+    return {
+      name,
+      start,
+      end,
+    };
   };

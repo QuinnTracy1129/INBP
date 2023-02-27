@@ -6,16 +6,7 @@ module.exports = req =>
     .then(task => {
       if (task) {
         if (!task.isCompleted) {
-          const { name, start, end } = req.body;
-
-          return updateEntity(
-            {
-              name,
-              start,
-              end,
-            },
-            task.end
-          )
+          return updateEntity(req.body, task.end)
             .then(res =>
               TaskModel.findByIdAndUpdate(req.params.id, res, { new: true })
                 .then(task => ({
@@ -27,7 +18,7 @@ module.exports = req =>
             .catch(err => ({ error: err.message, statusCode: 400 }));
         } else {
           return {
-            error: "Cannot update completed task!",
+            error: "Cannot update a completed task!",
             statusCode: 403,
           };
         }

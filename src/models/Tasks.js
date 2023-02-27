@@ -30,6 +30,9 @@ const modelSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    submittedAt: {
+      type: String,
+    },
     deletedAt: {
       type: String,
     },
