@@ -1,24 +1,36 @@
-const UserModel = require("../../models/Users");
+const UserModel = require("../../models/Users"),
+  loginEntity = require("../../entities/Auth/login");
 
-module.exports = req => {
-  const { email, password } = req.query;
-
-  return UserModel.findOne({ $or: [{ email }, { mobile: email }] })
-    .then(async user => {
-      if (user) {
-        if (await user.matchPassword(password)) {
-          if (!user.deletedAt) {
-            user.password = undefined;
-            return { user, token: await user.createToken() };
+module.exports = req =>
+  loginEntity(req.query)
+    .then(res =>
+      UserModel.findOne({ $or: [{ email: res.email }, { mobile: res.email }] })
+        .then(async user => {
+          if (user) {
+            if (await user.matchPassword(res.password)) {
+              if (!user.deletedAt) {
+                user.password = undefined;
+                return {
+                  user,
+                  token: await user.createToken(),
+                  statusCode: 200,
+                };
+              } else {
+                return {
+                  error: "Your account has been banned!",
+                  statusCode: 403,
+                };
+              }
+            } else {
+              return { error: "Password is incorrect!", statusCode: 400 };
+            }
           } else {
-            return { error: "Your account has been banned!" };
+            return {
+              error: "Credentials does not match!",
+              statusCode: 404,
+            };
           }
-        } else {
-          return { error: "Password is incorrect!" };
-        }
-      } else {
-        return { error: "Account is not in our database!" };
-      }
-    })
-    .catch(error => ({ error: error.message, statusCode: 400 }));
-};
+        })
+        .catch(error => ({ error: error.message, statusCode: 400 }))
+    )
+    .catch(err => ({ error: err.message, statusCode: 400 }));
