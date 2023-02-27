@@ -24,10 +24,6 @@ const modelSchema = new mongoose.Schema(
   }
 );
 
-modelSchema.query.byAction = function (action) {
-  return this.where({ action });
-};
-
 const Entity = mongoose.model("Histories", modelSchema);
 
 module.exports = Entity;
