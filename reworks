@@ -17,5 +17,6 @@ this also marks as your completion date via submittedAt
 created new route for tasks,
 task/:id/submit marks a task complete and returns status if early or late
 
-added History table for viewing of histories of a certain data or histories within a whole model
+added History model for viewing of histories of a certain data or histories within a whole model
 (limited only by delete and restore)
+(automatically stores data in history when deleting and restoring an item)
