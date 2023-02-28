@@ -12,7 +12,10 @@ added validation for start and end, end cannot be earlier than start
 updated task update to limit only name, start and end
 
 added validations for tasks, cannot update a completed task
-this also marks as your completion date via updatedAt
+this also marks as your completion date via submittedAt
 
 created new route for tasks,
 task/:id/submit marks a task complete and returns status if early or late
+
+added History table for viewing of histories of a certain data or histories within a whole model
+(limited only by delete and restore)

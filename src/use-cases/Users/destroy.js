@@ -25,7 +25,7 @@ module.exports = req =>
         } else {
           return {
             error: "User is already deleted",
-            statusCode: 400,
+            statusCode: 208,
           };
         }
       } else {

@@ -25,7 +25,7 @@ module.exports = req =>
         } else {
           return {
             error: "User is already restored.",
-            statusCode: 400,
+            statusCode: 208,
           };
         }
       } else {
