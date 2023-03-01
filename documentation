@@ -4,4 +4,13 @@ generate users (3 for presentation)
 all new users will be guest
 
 use auth/ascend to become an admin
-use auth/promote to promote to employee
+use auth/promote to promote guest to employee
+use auth/demote to demote employee to guest
+
+step 2 
+test authorizations via Users API
+
+users/browse should be available for public
+users/archive should be available for restricted
+users/destroy should be available for elite
+users/restore should be available for elite
