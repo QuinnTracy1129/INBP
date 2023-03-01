@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const modelSchema = new mongoose.Schema(
   {
-    userId: {
+    user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Users",
       required: true,
@@ -42,8 +42,8 @@ const modelSchema = new mongoose.Schema(
   }
 );
 
-modelSchema.query.byUser = function (userId) {
-  return this.where({ userId });
+modelSchema.query.byUser = function (user) {
+  return this.where({ user });
 };
 
 modelSchema.query.byCompleted = function (isCompleted) {

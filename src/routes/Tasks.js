@@ -13,7 +13,7 @@ const router = require("express").Router(),
 router
   .get("/", verify, ExpressCallback(browseController))
   .get("/archive", verify, ExpressCallback(archiveController))
-  .get("/:userId/find", verify, ExpressCallback(findController))
+  .get("/:user/find", verify, ExpressCallback(findController))
   .get("/:id/submit", verify, ExpressCallback(submitController))
   .post("/create", verify, ExpressCallback(createController))
   .put("/:id/update", verify, ExpressCallback(updateController))

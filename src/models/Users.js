@@ -10,27 +10,38 @@ const userSchema = new mongoose.Schema(
         trim: true,
         required: true,
       },
+      mname: {
+        type: String,
+        trim: true,
+      },
       lname: {
         type: String,
         trim: true,
         required: true,
       },
+      suffix: {
+        type: String,
+        enum: {
+          values: ["JR", "SR", "III", "IV", "V"],
+          message: "{VALUE} is not supported",
+        },
+        trim: true,
+      },
     },
-    address: {
-      present: {
-        type: String,
-        trim: true,
-        required: true,
-      },
-      permanent: {
-        type: String,
-        trim: true,
-        required: true,
-      },
+    role: {
+      type: String,
+      required: true,
+    },
+    nickname: {
+      type: String,
     },
     mobile: {
       type: String,
       unique: true,
+      required: true,
+    },
+    dob: {
+      type: String,
       required: true,
     },
     email: {

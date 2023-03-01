@@ -6,9 +6,9 @@ module.exports = req => {
   if (status) {
     if (status === "completed" || status === "pending") {
       return TaskModel.find()
-        .byUser(req.params.userId)
+        .byUser(req.params.user)
         .byCompleted(status === "completed")
-        .select("-userId -createdAt -updatedAt")
+        .select("-user -createdAt -updatedAt")
         .sort({ createdAt: -1 })
         .then(tasks => ({
           success: tasks.filter(item => !item.deletedAt),
@@ -23,8 +23,8 @@ module.exports = req => {
     }
   } else {
     return TaskModel.find()
-      .byUser(req.params.userId)
-      .select("-userId -createdAt -updatedAt")
+      .byUser(req.params.user)
+      .select("-user -createdAt -updatedAt")
       .sort({ createdAt: -1 })
       .then(tasks => ({
         success: tasks.filter(item => !item.deletedAt),

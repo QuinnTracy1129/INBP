@@ -1,0 +1,86 @@
+fix all responses to proper responses
+
+register response 201
+dont return everything. especially sensitive data
+
+start and end of task
+status of completion: isEarly
+
+email no space
+mobile no space
+
+invalid email: return Email and Password is incorrect
+-Credentials does not match (specifying that it doesnt match while not giving away the details of it not being in the database)
+return as 404
+
+validate data types upon registering, use that in entities
+
+history of deletions
+
+Add new models, keys are provided by sir ryan
+
+Users
+-fullName{
+fname:
+mname:
+lname:
+suffix:
+}
+-role
+-nickname
+-dob
+
+Addresses
+-user unique
+-address:{
+--current: {
+street:
+brgy:
+city:
+region:
+province:
+zipCode:
+}
+--permanent: {
+street:
+brgy:
+city:
+region:
+province:
+zipCode:
+}
+--gmap
+}
+
+Contracts
+-user unique
+-team
+-platform
+-level
+-clientId
+-email
+-position
+-isRegular
+-expiration
+
+Clients
+-name
+-email
+
+Vaccinations
+-user unique
+-vaccineId
+-initial
+-sequel
+-booster
+-emergency {
+person:
+number:
+}
+
+Vaccines
+-name
+["Pfizer-BioNTech", "Moderna", "Johnson & Johnson's Janssen", "AstraZeneca", "Sinovac", "Sinopharm"]
+-isSingle
+-interval
+[21, 28, 0, 30, 14, 21]

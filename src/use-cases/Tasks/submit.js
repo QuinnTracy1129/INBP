@@ -9,7 +9,7 @@ module.exports = req =>
           return submitEntity(task)
             .then(res =>
               TaskModel.findByIdAndUpdate(req.params.id, res, { new: true })
-                .select("-createdAt -updatedAt -userId")
+                .select("-createdAt -updatedAt -user")
                 .then(task => ({
                   success: task,
                   statusCode: 200,

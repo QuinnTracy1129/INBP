@@ -3,7 +3,7 @@ const TaskModel = require("../../models/Tasks");
 module.exports = req =>
   TaskModel.find()
     .populate({
-      path: "userId",
+      path: "user",
       select: "-password -mobile -email -createdAt -updatedAt",
     })
     .select("-createdAt -updatedAt")
