@@ -1,11 +1,18 @@
+const public = ["admin", "employee", "guest"],
+  restricted = ["admin", "employee"],
+  proletariat = ["employee", "guest"],
+  elite = ["admin"];
+
 module.exports = {
   users: {
-    browse: ["admin", "employee", "guest"],
-    archive: ["admin", "employee"],
-    delete: ["admin"],
-    restore: ["admin"],
+    browse: public,
+    archive: restricted,
+    delete: elite,
+    restore: elite,
   },
   auth: {
-    ascend: ["employee", "guest"],
+    ascend: proletariat,
+    promote: elite,
+    demote: elite,
   },
 };

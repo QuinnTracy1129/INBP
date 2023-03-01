@@ -10,7 +10,7 @@ module.exports = req =>
           if (user) {
             return {
               success: `User (${user.email}) ascended successfully.`,
-              statusCode: 404,
+              statusCode: 200,
             };
           } else {
             return {
