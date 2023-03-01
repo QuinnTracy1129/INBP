@@ -7,9 +7,9 @@ const router = require("express").Router(),
   verify = require("../middleware/verify");
 
 router
-  .get("/", verify, ExpressCallback(browseController))
+  .get("/browse", verify, ExpressCallback(browseController))
   .get("/archive", verify, ExpressCallback(archiveController))
-  .put("/:id/restore", verify, ExpressCallback(restoreController))
-  .delete("/:id/destroy", verify, ExpressCallback(destroyController));
+  .put("/restore", verify, ExpressCallback(restoreController))
+  .delete("/destroy", verify, ExpressCallback(destroyController));
 
 module.exports = router;

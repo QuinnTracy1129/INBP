@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken"),
-  UserModel = require("../models/Users");
+  UserModel = require("../models/Users"),
+  { accessRights } = require("../utilities");
 
 module.exports = (req, res, proceed) => {
   let token = req.headers.authorization;
@@ -16,12 +17,22 @@ module.exports = (req, res, proceed) => {
           if (error && error.name) {
             res.status(401).json({ expired: "Not authorized, token expired" });
           } else {
-            if (await UserModel.findById(response.id)) {
-              proceed();
+            const _user = await UserModel.findById(response.id);
+            if (_user) {
+              const _base = req.baseUrl.slice(1, req.baseUrl.length);
+              const _path = req.path.slice(1, req.path.length);
+
+              const _access = accessRights[_base][_path];
+
+              if (_access.includes(_user.role.access)) {
+                proceed();
+              } else {
+                res
+                  .status(403)
+                  .json({ expired: "Not authorized, invalid access" });
+              }
             } else {
-              res
-                .status(401)
-                .json({ expired: "Not authorized, invalid access" });
+              res.status(403).json({ expired: "Not authorized, invalid user" });
             }
           }
         }

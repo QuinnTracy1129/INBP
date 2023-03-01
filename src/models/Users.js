@@ -81,7 +81,7 @@ userSchema.methods.matchPassword = async function (password) {
   return await bcrypt.compare(password, this.password);
 };
 
-userSchema.methods.createToken = async function () {
+userSchema.methods.createToken = function () {
   return generateToken(this._id);
 };
 
