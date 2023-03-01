@@ -1,0 +1,7 @@
+step 1
+generate users (3 for presentation)
+
+all new users will be guest
+
+use auth/ascend to become an admin
+use auth/promote to promote to employee
