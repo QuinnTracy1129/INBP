@@ -13,7 +13,7 @@ const modelSchema = new mongoose.Schema(
     action: {
       type: String,
       enum: {
-        values: ["delete", "restore"],
+        values: ["delete", "restore", "reset"],
         message: "{VALUE} is not supported",
       },
       required: true,

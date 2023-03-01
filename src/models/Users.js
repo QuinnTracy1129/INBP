@@ -25,12 +25,25 @@ const userSchema = new mongoose.Schema(
           values: ["JR", "SR", "III", "IV", "V"],
           message: "{VALUE} is not supported",
         },
-        trim: true,
       },
     },
     role: {
-      type: String,
-      required: true,
+      access: {
+        type: String,
+        enum: {
+          values: ["admin", "employee", "guest"],
+          message: "{VALUE} is not supported",
+        },
+        required: true,
+      },
+      name: {
+        type: String,
+        enum: {
+          values: ["Administrator", "Employee", "Guest"],
+          message: "{VALUE} is not supported",
+        },
+        required: true,
+      },
     },
     nickname: {
       type: String,

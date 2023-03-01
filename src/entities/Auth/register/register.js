@@ -1,33 +1,31 @@
 module.exports = ({}) =>
   async function (form) {
-    const { fullName, address, mobile, email, password } = form;
+    const { fullName, mobile, nickname, dob, email, password } = form;
 
     if (typeof fullName === "object") {
-      const { fname, lname } = fullName;
+      const { fname, mname, lname, suffix } = fullName;
 
       if (typeof fname !== "string") {
         throw new Error("Invalid data type for First name!");
       }
 
+      if (mname && typeof mname !== "string") {
+        throw new Error("Invalid data type for Middle name!");
+      }
+
       if (typeof lname !== "string") {
         throw new Error("Invalid data type for Last name!");
+      }
+
+      if (suffix && typeof suffix !== "string") {
+        throw new Error("Invalid data type for Suffix!");
       }
     } else {
       throw new Error("Invalid data type for Fullname!");
     }
 
-    if (typeof address === "object") {
-      const { present, permanent } = address;
-
-      if (typeof present !== "string") {
-        throw new Error("Invalid data type for Present address!");
-      }
-
-      if (typeof permanent !== "string") {
-        throw new Error("Invalid data type for Permanent address!");
-      }
-    } else {
-      throw new Error("Invalid data type for Address!");
+    if (nickname && typeof nickname !== "string") {
+      throw new Error("Invalid data type for Nickname!");
     }
 
     if (typeof mobile === "string") {
@@ -42,6 +40,16 @@ module.exports = ({}) =>
       }
     } else {
       throw new Error("Invalid data type for Mobile number!");
+    }
+
+    if (typeof dob === "string") {
+      const dobTime = new Date(dob).getTime();
+
+      if (isNaN(dobTime)) {
+        throw new Error("Invalid Date of birth!");
+      }
+    } else {
+      throw new Error("Invalid data type for Date of birth!");
     }
 
     if (typeof email === "string") {
