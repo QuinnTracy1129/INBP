@@ -1,5 +1,6 @@
 const UserModel = require("../../models/Users"),
-  loginEntity = require("../../entities/Auth/login");
+  loginEntity = require("../../entities/Auth/login"),
+  { getAge } = require("../../utilities");
 
 module.exports = req =>
   loginEntity(req.query)
@@ -10,9 +11,11 @@ module.exports = req =>
           if (user) {
             if (await user.matchPassword(res.password)) {
               if (!user.deletedAt) {
-                user.password = undefined;
+                const _user = { ...user._doc };
+                _user.password = undefined;
+                _user.age = getAge(user.dob);
                 return {
-                  success: user,
+                  success: _user,
                   token: await user.createToken(),
                   statusCode: 200,
                 };
