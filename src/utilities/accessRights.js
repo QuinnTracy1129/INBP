@@ -4,15 +4,15 @@ const public = ["admin", "employee", "guest"],
   elite = ["admin"];
 
 module.exports = {
+  auth: {
+    ascend: proletariat,
+    promote: elite,
+    demote: elite,
+  },
   users: {
     browse: public,
     archive: restricted,
     delete: elite,
     restore: elite,
-  },
-  auth: {
-    ascend: proletariat,
-    promote: elite,
-    demote: elite,
   },
 };
