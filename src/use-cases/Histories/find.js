@@ -11,13 +11,13 @@ module.exports = req => {
     keys.action = action;
   }
 
-  if (key) {
+  if (key && data) {
     return HistoryModel.find(keys)
       .then(histories => ({ success: histories, statusCode: 200 }))
       .catch(error => ({ error: error.message, statusCode: 400 }));
   } else {
     return {
-      error: "Invalid key!",
+      error: "Invalid parameters!",
       statusCode: 400,
     };
   }
