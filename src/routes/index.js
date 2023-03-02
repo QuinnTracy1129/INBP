@@ -4,4 +4,5 @@ module.exports = app => {
   app.use("/users", require("./Users"));
   app.use("/tasks", require("./Tasks"));
   app.use("/histories", require("./Histories"));
+  app.use("/addresses", require("./Addresses"));
 };

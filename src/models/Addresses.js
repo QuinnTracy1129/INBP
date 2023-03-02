@@ -20,11 +20,11 @@ const modelSchema = new mongoose.Schema(
         type: String,
         required: true,
       },
-      region: {
+      province: {
         type: String,
         required: true,
       },
-      province: {
+      region: {
         type: String,
         required: true,
       },
@@ -45,11 +45,11 @@ const modelSchema = new mongoose.Schema(
         type: String,
         required: true,
       },
-      region: {
+      province: {
         type: String,
         required: true,
       },
-      province: {
+      region: {
         type: String,
         required: true,
       },

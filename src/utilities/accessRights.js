@@ -29,4 +29,9 @@ module.exports = {
     browse: elite,
     find: elite,
   },
+  addresses: {
+    browse: restricted,
+    find: restricted,
+    createOrUpdate: restricted,
+  },
 };
