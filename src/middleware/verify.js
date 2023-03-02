@@ -6,7 +6,7 @@ module.exports = (req, res, proceed) => {
   let token = req.headers.authorization;
 
   if (!token) {
-    res.status(401).json("Not authorized, no token");
+    res.status(401).json({ error: "Not authorized, no token!" });
   } else {
     if (token.startsWith("Bearer")) {
       // decode token
@@ -15,7 +15,7 @@ module.exports = (req, res, proceed) => {
         process.env.JWT_SECRET,
         async (error, response) => {
           if (error && error.name) {
-            res.status(401).json({ expired: "Not authorized, token expired" });
+            res.status(401).json({ expired: "Not authorized, token expired!" });
           } else {
             const _user = await UserModel.findById(response.id);
             if (_user) {
@@ -32,16 +32,16 @@ module.exports = (req, res, proceed) => {
               } else {
                 res
                   .status(403)
-                  .json({ expired: "Not authorized, invalid access" });
+                  .json({ error: "Not authorized, invalid access!" });
               }
             } else {
-              res.status(403).json({ expired: "Not authorized, invalid user" });
+              res.status(403).json({ error: "Not authorized, invalid user!" });
             }
           }
         }
       );
     } else {
-      res.status(401).json({ error: "Not authorized, invalid token" });
+      res.status(401).json({ error: "Not authorized, invalid token!" });
     }
   }
 };
