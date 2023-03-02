@@ -2,18 +2,18 @@ const TaskModel = require("../../models/Tasks"),
   HistoryModel = require("../../models/Histories");
 
 module.exports = req =>
-  TaskModel.findById(req.params.id)
+  TaskModel.findById(req.query.id)
     .then(task => {
       if (task) {
         if (task.deletedAt) {
-          return TaskModel.findByIdAndUpdate(req.params.id, {
+          return TaskModel.findByIdAndUpdate(req.query.id, {
             deletedAt: null,
           })
             .then(() =>
               HistoryModel.create({
                 model: "Tasks",
                 action: "restore",
-                dataId: req.params.id,
+                dataId: req.query.id,
               })
                 .then(() => ({
                   success: `Task (${task._id}) restored successfully.`,

@@ -11,13 +11,13 @@ const router = require("express").Router(),
   verify = require("../middleware/verify");
 
 router
-  .get("/", verify, ExpressCallback(browseController))
-  .get("/archive", verify, ExpressCallback(archiveController))
-  .get("/:user/find", verify, ExpressCallback(findController))
-  .get("/:id/submit", verify, ExpressCallback(submitController))
   .post("/create", verify, ExpressCallback(createController))
-  .put("/:id/update", verify, ExpressCallback(updateController))
-  .put("/:id/restore", verify, ExpressCallback(restoreController))
-  .delete("/:id/destroy", verify, ExpressCallback(destroyController));
+  .get("/browse", verify, ExpressCallback(browseController))
+  .get("/archive", verify, ExpressCallback(archiveController))
+  .get("/find", verify, ExpressCallback(findController))
+  .put("/update", verify, ExpressCallback(updateController))
+  .get("/submit", verify, ExpressCallback(submitController))
+  .put("/restore", verify, ExpressCallback(restoreController))
+  .delete("/destroy", verify, ExpressCallback(destroyController));
 
 module.exports = router;

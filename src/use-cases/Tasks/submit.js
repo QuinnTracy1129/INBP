@@ -2,13 +2,13 @@ const TaskModel = require("../../models/Tasks"),
   submitEntity = require("../../entities/Tasks/submit");
 
 module.exports = req =>
-  TaskModel.findById(req.params.id)
+  TaskModel.findById(req.query.id)
     .then(task => {
       if (task) {
         if (!task.isCompleted) {
           return submitEntity(task)
             .then(res =>
-              TaskModel.findByIdAndUpdate(req.params.id, res, { new: true })
+              TaskModel.findByIdAndUpdate(req.query.id, res, { new: true })
                 .select("-createdAt -updatedAt -user")
                 .then(task => ({
                   success: task,

@@ -12,7 +12,17 @@ module.exports = {
   users: {
     browse: public,
     archive: restricted,
-    delete: elite,
+    destroy: elite,
+    restore: elite,
+  },
+  tasks: {
+    create: public,
+    browse: public,
+    archive: restricted,
+    find: public,
+    update: public,
+    submit: public,
+    destroy: elite,
     restore: elite,
   },
 };
