@@ -1,8 +1,7 @@
 const HistoryModel = require("../../models/Histories");
 
 module.exports = req => {
-  const { key, action } = req.query,
-    { data } = req.params;
+  const { key, action, data } = req.query;
 
   const keys = {
     [key]: data,

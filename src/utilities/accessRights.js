@@ -25,4 +25,8 @@ module.exports = {
     destroy: elite,
     restore: elite,
   },
+  histories: {
+    browse: elite,
+    find: elite,
+  },
 };

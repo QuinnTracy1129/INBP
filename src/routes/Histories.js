@@ -5,7 +5,7 @@ const router = require("express").Router(),
   verify = require("../middleware/verify");
 
 router
-  .get("/", verify, ExpressCallback(browseController))
-  .get("/:data/find", verify, ExpressCallback(findController));
+  .get("/browse", verify, ExpressCallback(browseController))
+  .get("/find", verify, ExpressCallback(findController));
 
 module.exports = router;
