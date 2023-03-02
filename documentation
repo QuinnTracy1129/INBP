@@ -1,4 +1,3 @@
-step 1
 generate users (3 for presentation)
 
 all new users will be guest
@@ -7,10 +6,17 @@ use auth/ascend to become an admin
 use auth/promote to promote guest to employee
 use auth/demote to demote employee to guest
 
-step 2 
-test authorizations via Users API
+guest account
+-view users
 
-users/browse should be available for public
-users/archive should be available for restricted
-users/destroy should be available for elite
-users/restore should be available for elite
+-view tasks
+-create task
+-update task
+-submit task
+
+employee account
+-can do everything except destroy and restore
+
+admin account
+-responsible for deleting and restoring data
+-can view histories

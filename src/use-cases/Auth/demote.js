@@ -1,4 +1,5 @@
 const UserModel = require("../../models/Users"),
+  HistoryModel = require("../../models/Histories"),
   demoteEntity = require("../../entities/Auth/demote"),
   roleDb = require("../../fakeDb/roles");
 
@@ -10,10 +11,18 @@ module.exports = req =>
           if (user) {
             if (user.role.access === "employee") {
               return UserModel.findByIdAndUpdate(id, { role: roleDb[2] })
-                .then(async user => ({
-                  success: `User (${user.email}) demoted successfully.`,
-                  statusCode: 200,
-                }))
+                .then(user =>
+                  HistoryModel.create({
+                    model: "Users",
+                    action: "demote",
+                    dataId: user._id,
+                  })
+                    .then(() => ({
+                      success: `User (${user.email}) demoted successfully.`,
+                      statusCode: 200,
+                    }))
+                    .catch(error => ({ error: error.message, statusCode: 400 }))
+                )
                 .catch(error => ({ error: error.message, statusCode: 400 }));
             } else {
               return {
