@@ -1,13 +1,12 @@
 const AddressModel = require("../../models/Addresses"),
-  createEntity = require("../../entities/Addresses/create"),
-  updateEntity = require("../../entities/Addresses/update");
+  createOrUpdateEntity = require("../../entities/Addresses/createOrUpdate");
 
 module.exports = req =>
   AddressModel.findOne({ user: req.query.user })
     .sort({ createdAt: -1 })
     .then(address => {
       if (address) {
-        return updateEntity(req.body, req.query.user)
+        return createOrUpdateEntity(req.body, req.query.user)
           .then(res =>
             AddressModel.findByIdAndUpdate(address._id, res, { new: true })
               .then(data => ({ success: data, statusCode: 200 }))
@@ -15,7 +14,7 @@ module.exports = req =>
           )
           .catch(err => ({ error: err.message, statusCode: 400 }));
       } else {
-        return createEntity(req.body, req.query.user)
+        return createOrUpdateEntity(req.body, req.query.user, "create")
           .then(res =>
             AddressModel.create(res)
               .then(data => ({ success: data, statusCode: 201 }))

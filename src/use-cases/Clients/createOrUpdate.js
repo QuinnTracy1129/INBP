@@ -1,5 +1,6 @@
 const ClientModel = require("../../models/Clients"),
-  createOrUpdateEntity = require("../../entities/Clients/createOrUpdate");
+  createEntity = require("../../entities/Clients/create"),
+  updateEntity = require("../../entities/Clients/update");
 
 module.exports = req => {
   if (req.query.id) {
@@ -7,7 +8,7 @@ module.exports = req => {
       .sort({ createdAt: -1 })
       .then(client => {
         if (client) {
-          return createOrUpdateEntity(req.body)
+          return updateEntity(req.body)
             .then(res =>
               ClientModel.findByIdAndUpdate(client._id, res, { new: true })
                 .then(data => ({ success: data, statusCode: 200 }))
@@ -23,7 +24,7 @@ module.exports = req => {
       })
       .catch(error => ({ error: error.message, statusCode: 400 }));
   } else {
-    return createOrUpdateEntity(req.body, "create")
+    return createEntity(req.body)
       .then(res =>
         ClientModel.create(res)
           .then(data => ({ success: data, statusCode: 201 }))
