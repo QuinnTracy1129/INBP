@@ -44,4 +44,9 @@ module.exports = {
     find: restricted,
     createOrUpdate: elite,
   },
+  vaccinations: {
+    browse: restricted,
+    find: restricted,
+    createOrUpdate: restricted,
+  },
 };
