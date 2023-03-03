@@ -47,6 +47,6 @@ module.exports = {
   vaccinations: {
     browse: restricted,
     find: restricted,
-    createOrUpdate: restricted,
+    create: restricted,
   },
 };

@@ -22,7 +22,7 @@ const validateAddress = (address, type) => {
       throw new Error(`Invalid data type for ${type} Region!`);
     }
 
-    if (isNaN(Number(zipCode))) {
+    if (isNaN(zipCode)) {
       throw new Error(`Invalid data type for ${type} Zip Code!`);
     }
   } else {
