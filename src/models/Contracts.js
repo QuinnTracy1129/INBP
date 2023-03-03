@@ -8,10 +8,9 @@ const modelSchema = new mongoose.Schema(
       unique: true,
       required: true,
     },
-    clientId: {
+    client: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Clients",
-      required: true,
     },
     team: {
       type: String,

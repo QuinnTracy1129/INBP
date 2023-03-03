@@ -6,4 +6,5 @@ module.exports = app => {
   app.use("/histories", require("./Histories"));
   app.use("/addresses", require("./Addresses"));
   app.use("/clients", require("./Clients"));
+  app.use("/contracts", require("./Contracts"));
 };

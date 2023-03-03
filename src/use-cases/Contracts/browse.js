@@ -1,14 +1,15 @@
-const AddressModel = require("../../models/Addresses");
+const ContractModel = require("../../models/Contracts");
 
 module.exports = req =>
-  AddressModel.find()
+  ContractModel.find()
     .populate({
       path: "user",
       select: "-password -email -updatedAt -role",
     })
+    .populate("client")
     .sort({ createdAt: -1 })
-    .then(addresses => ({
-      success: addresses.filter(item => !item.deletedAt),
+    .then(contracts => ({
+      success: contracts.filter(item => !item.deletedAt),
       statusCode: 200,
     }))
     .catch(error => ({ error: error.message, statusCode: 400 }));

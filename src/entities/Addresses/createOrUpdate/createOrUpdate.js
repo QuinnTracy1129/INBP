@@ -57,14 +57,14 @@ module.exports = ({}) =>
         response.permanent = permanent;
       }
 
-      if (gmap && typeof gmap !== "string") {
-        throw new Error("Invalid data type for Google Map!");
-      } else {
-        response.gmap = gmap;
+      if (gmap) {
+        if (typeof gmap !== "string") {
+          throw new Error("Invalid data type for Google Map!");
+        } else {
+          response.gmap = gmap;
+        }
       }
     }
-
-    console.log(response);
 
     return response;
   };

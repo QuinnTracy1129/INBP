@@ -34,6 +34,11 @@ module.exports = {
     find: restricted,
     createOrUpdate: restricted,
   },
+  contracts: {
+    browse: elite,
+    find: restricted,
+    createOrUpdate: elite,
+  },
   clients: {
     browse: restricted,
     find: restricted,

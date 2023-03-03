@@ -24,9 +24,6 @@ module.exports = (req, res, proceed) => {
 
               const _access = accessRights[_base][_path];
 
-              // console.log(_access);
-              // console.log(_user.role.access);
-
               if (_access.includes(_user.role.access)) {
                 proceed();
               } else {
