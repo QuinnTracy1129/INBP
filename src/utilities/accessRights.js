@@ -34,4 +34,9 @@ module.exports = {
     find: restricted,
     createOrUpdate: restricted,
   },
+  clients: {
+    browse: restricted,
+    find: restricted,
+    createOrUpdate: elite,
+  },
 };

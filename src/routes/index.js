@@ -5,4 +5,5 @@ module.exports = app => {
   app.use("/tasks", require("./Tasks"));
   app.use("/histories", require("./Histories"));
   app.use("/addresses", require("./Addresses"));
+  app.use("/clients", require("./Clients"));
 };

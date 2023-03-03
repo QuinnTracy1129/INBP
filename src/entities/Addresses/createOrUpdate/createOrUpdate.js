@@ -45,6 +45,7 @@ module.exports = ({}) =>
       }
 
       response = form;
+      response.user = user;
     } else {
       if (current) {
         validateAddress(current, "Current");
@@ -62,6 +63,8 @@ module.exports = ({}) =>
         response.gmap = gmap;
       }
     }
+
+    console.log(response);
 
     return response;
   };
