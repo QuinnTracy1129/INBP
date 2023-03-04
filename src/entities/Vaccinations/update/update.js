@@ -27,12 +27,11 @@ const daysDiff = (first, second) => {
 };
 
 module.exports = ({}) =>
-  async function (form, old) {
+  async function (form, key, old) {
     const { vaccineIndex, initial, sequel, booster, emergency } = form;
 
-    const _vaccineIndex = vaccineIndex ? vaccineIndex : old.vaccineIndex;
-
-    const vaccine = vaccines[_vaccineIndex];
+    var response = {},
+      _vaccineIndex;
 
     if (vaccineIndex) {
       if (isNaN(vaccineIndex)) {
@@ -42,78 +41,57 @@ module.exports = ({}) =>
       if (vaccineIndex > vaccines.length - 1) {
         throw new Error("Invalid Vaccine Index!");
       }
+
+      _vaccineIndex = vaccineIndex;
+    } else {
+      _vaccineIndex = old.vaccineIndex;
     }
 
-    if (initial) {
-      if (typeof initial === "object") {
-        validateDetails(initial);
+    var vaccine = vaccines[_vaccineIndex];
 
-        if (sequel) {
+    switch (key) {
+      case "sequel":
+        if (typeof sequel === "object") {
           if (!vaccine.isSingle) {
-            if (typeof sequel === "object") {
-              validateDetails(sequel);
+            validateDetails(sequel);
 
-              const dateDiff = daysDiff(initial.date, sequel.date);
-
-              if (dateDiff < vaccine.interval) {
-                throw new Error(
-                  `Invalid Vaccine Interval, ${vaccine.name} requires ${vaccine.interval} days interval!`
-                );
-              }
-            } else {
-              throw new Error("Invalid data type for Sequel!");
-            }
-          } else {
-            throw new Error(
-              `Invalid sequel, ${vaccine.name} does not require second shot`
-            );
-          }
-        }
-
-        if (booster) {
-          if (typeof booster === "object") {
-            validateDetails(booster);
-            if (vaccine.isSingle) {
-              const dateDiff = daysDiff(initial.date, booster.date);
-
-              if (dateDiff < 90) {
-                throw new Error(
-                  "Invalid Booster Interval, booster shot required at least 90 days of first shot!"
-                );
-              }
-            } else {
-              if (sequel) {
-                const dateDiff = daysDiff(sequel.date, booster.date);
-
-                if (dateDiff < 90) {
-                  throw new Error(
-                    "Invalid Booster Interval, booster shot required at least 90 days of second shot!"
-                  );
-                }
-              } else {
-                throw new Error(
-                  "Cannot submit Booster details without having second shot!"
-                );
-              }
-            }
-          } else {
-            throw new Error("Invalid data type for Booster!");
-          }
-        }
-
-        if (!vaccine.isSingle) {
-          if (old.sequel) {
-            const dateDiff = daysDiff(initial.date, old.sequel.date);
+            const dateDiff = daysDiff(old.initial.date, sequel.date);
 
             if (dateDiff < vaccine.interval) {
               throw new Error(
                 `Invalid Vaccine Interval, ${vaccine.name} requires ${vaccine.interval} days interval!`
               );
             }
+
+            response.sequel = sequel;
+          } else {
+            throw new Error(
+              `Invalid sequel, ${vaccine.name} does not require second shot`
+            );
           }
         } else {
-          if (old.booster) {
-            const dateDiff = daysDiff(initial.date, old.booster.date);
+          throw new Error("Invalid data type for Sequel!");
+        }
+        break;
+
+      case "booster":
+        if (typeof booster === "object") {
+          validateDetails(booster);
+
+          if (!vaccine.isSingle) {
+            if (old.sequel.date) {
+              const dateDiff = daysDiff(old.sequel.date, booster.date);
+
+              if (dateDiff < 90) {
+                throw new Error(
+                  "Invalid Booster Interval, booster shot required at least 90 days of second shot!"
+                );
+              }
+            } else {
+              throw new Error("Cannot update Booster without setting Sequel!");
+            }
+          } else {
+            const dateDiff = daysDiff(old.initial.date, booster.date);
 
             if (dateDiff < 90) {
               throw new Error(
@@ -121,62 +99,15 @@ module.exports = ({}) =>
               );
             }
           }
-        }
-      } else {
-        throw new Error("Invalid data type for Initial!");
-      }
-    }
-
-    if (sequel) {
-      if (!vaccine.isSingle) {
-        if (typeof sequel === "object") {
-          validateDetails(sequel);
-
-          const dateDiff = daysDiff(initial.date, sequel.date);
-
-          if (dateDiff < vaccine.interval) {
-            throw new Error(
-              `Invalid Vaccine Interval, ${vaccine.name} requires ${vaccine.interval} days interval!`
-            );
-          }
+          response.booster = booster;
         } else {
-          throw new Error("Invalid data type for Sequel!");
+          throw new Error("Invalid data type for Booster!");
         }
-      } else {
-        throw new Error(
-          `Invalid sequel, ${vaccine.name} does not require second shot`
-        );
-      }
+        break;
+
+      default:
+        throw new Error("Invalid key!");
     }
 
-    if (emergency) {
-      if (typeof emergency === "object") {
-        const { person, mobile } = emergency;
-
-        if (typeof person !== "string") {
-          throw new Error("Invalid data type for Emergency Person!");
-        }
-
-        if (typeof mobile === "string") {
-          const mobileTrim = mobile.trim();
-
-          if (isNaN(Number(mobileTrim))) {
-            throw new Error("Invalid Emergency Mobile!");
-          }
-
-          if (mobileTrim.length !== 10) {
-            throw new Error("Invalid length for Emergency Mobile!");
-          }
-        } else {
-          throw new Error("Invalid data type for Emergency Mobile!");
-        }
-      } else {
-        throw new Error("Invalid data type for Emergency!");
-      }
-    }
-
-    return {
-      ...form,
-      user,
-    };
+    return response;
   };

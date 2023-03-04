@@ -48,5 +48,6 @@ module.exports = {
     browse: restricted,
     find: restricted,
     create: restricted,
+    update: restricted,
   },
 };
