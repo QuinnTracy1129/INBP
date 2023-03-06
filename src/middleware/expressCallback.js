@@ -3,6 +3,7 @@ module.exports = controller => (req, res) =>
     body: req.body,
     params: req.params,
     query: req.query,
+    headers: req.headers,
   })
     .then(httpResponse =>
       res.status(httpResponse.statusCode).json(httpResponse)

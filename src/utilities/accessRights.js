@@ -1,6 +1,6 @@
 const public = ["admin", "employee", "guest"],
-  restricted = ["admin", "employee"],
   proletariat = ["employee", "guest"],
+  restricted = ["admin", "employee"],
   elite = ["admin"];
 
 module.exports = {
@@ -49,5 +49,8 @@ module.exports = {
     find: restricted,
     create: restricted,
     update: restricted,
+  },
+  files: {
+    browse: public,
   },
 };

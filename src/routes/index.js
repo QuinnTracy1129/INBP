@@ -8,4 +8,5 @@ module.exports = app => {
   app.use("/clients", require("./Clients"));
   app.use("/contracts", require("./Contracts"));
   app.use("/vaccinations", require("./Vaccinations"));
+  app.use("/files", require("./Files"));
 };
